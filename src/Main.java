@@ -18,7 +18,10 @@ public class Main {
             System.out.println("1. Create a Student ");
             System.out.println("2. Create a Teacher ");
             System.out.println("3. Create a Subject ");
-            System.out.println("4. Exit ");
+            System.out.println("4. Print Student ");
+            System.out.println("5. Print Teacher ");
+            System.out.println("6. Print Subject ");
+            System.out.println("7. Exit ");
 
             option = sc.nextInt();
 
@@ -36,10 +39,19 @@ public class Main {
                     subjectList.add(subject);
                     break;
                 case 4:
-                    System.out.println("***** Exit System *******");
+                    printStudentList(studentList);
+                    break;
+                case 5:
+                    printTeacherList(teacherList);
+                    break;
+                case 6:
+                    printSubject(subjectList);
+                    break;
+                case 7:
+                    System.out.println("-------------- Exit System -----------------");
                     break;
             }
-        } while(option != 4);
+        } while(option != 7);
     }
 
     public static Student createStudent() {
@@ -113,6 +125,20 @@ public class Main {
             students.add(student);
         }
 
-        return new Subject(name, teacher, students);
+        return new Subject(name, teacher, students);}
+
+    public static void printSubject(List<Subject> subjectList) {
+        int index = 1;
+        for (Subject subject : subjectList) {
+            System.out.println(index + " . Subject: " + subject.getName().toUpperCase());
+            System.out.println(" . Teacher: " + subject.getTeacher().getName()
+                               + " - " + subject.getTeacher().getLastName());
+            System.out.println(" . Students: ");
+            List<Student> students = subject.getStudentList();
+            for (Student student : students) {
+                System.out.println(" - " + student.getName()
+                                   + " - " + student.getLastName());
+            }
+        }
     }
 }
